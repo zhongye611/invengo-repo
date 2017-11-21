@@ -7,5 +7,4 @@ server:
 #定义环境引用的配置文件
 spring:
   application:
-    name: super-boot-test-center
-    index: ${random.int}
+    name: invengo-test
