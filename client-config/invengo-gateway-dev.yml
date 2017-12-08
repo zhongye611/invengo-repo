@@ -1,11 +1,11 @@
-#web容器配置
+#web瀹瑰櫒閰嶇疆
 server:
   context-path: /
   port: 80
-#定义环境引用的配置文件
+#瀹氫箟鐜寮曠敤鐨勯厤缃枃浠�
 spring:
   application:
-    name: super-boot-gateway-center
+    name: invengo-gateway
     index: ${random.int}
   http:
     encoding:
@@ -14,16 +14,16 @@ spring:
     multipart:
       enabled: true
       max-file-size: 1024MB
-  #热加载配置
+  #鐑姞杞介厤缃�
   devtools:
     remote:
       secret: thisismysecret
   cloud:
-    #启用消息追踪
+    #鍚敤娑堟伅杩借釜
     bus:
       trace:
         enabled: true
-  #配置消息总线
+  #閰嶇疆娑堟伅鎬荤嚎
   rabbitmq:
     host: localhost
     port: 5672
@@ -31,7 +31,7 @@ spring:
     password: admin
   redis:
     cluster:
-      nodes: 127.0.0.1:7000, 127.0.0.1:7001,127.0.0.1:7002,127.0.0.1:7003,127.0.0.1:7004,127.0.0.1:7005
+      nodes: 127.0.0.1:7000 #, 127.0.0.1:7001,127.0.0.1:7002,127.0.0.1:7003,127.0.0.1:7004,127.0.0.1:7005
       pool:
         max-active: 10
         max-wait: 10000
@@ -39,31 +39,31 @@ spring:
         min-idle: 5
       cache-expire: 1800
       timeout: 10000
-#关闭安全认证
+#鍏抽棴瀹夊叏璁よ瘉
 management:
   security:
     enabled: false
-#启用调试模式
+#鍚敤璋冭瘯妯″紡
 debug: true
-#日志配置
+#鏃ュ織閰嶇疆
 logging:
   config: classpath:log4j2-dev.xml
 
 eureka:
   instance:
-    #心跳时间间隔
+    #蹇冭烦鏃堕棿闂撮殧
     lease-renewal-interval-in-seconds: 10
-    #无心跳多久后,该服务失效
+    #鏃犲績璺冲涔呭悗,璇ユ湇鍔″け鏁�
     lease-expiration-duration-in-seconds: 30
-    appname: 网关中心
-#Twitter_Snowflake 序列号生成器配置
+    appname: 缃戝叧涓績
+#Twitter_Snowflake 搴忓垪鍙风敓鎴愬櫒閰嶇疆
 Snowflake:
-  #工作中心ID 0-31
+  #宸ヤ綔涓績ID 0-31
   workerId: 0
-  #数据中心ID(0~31)
+  #鏁版嵁涓績ID(0~31)
   datacenterId: 0
 
-#配置服务超时时间默认为60秒
+#閰嶇疆鏈嶅姟瓒呮椂鏃堕棿榛樿涓�60绉�
 hystrix:
     command:
         default:
@@ -71,20 +71,20 @@ hystrix:
                 isolation:
                     thread:
                         timeoutInMilliseconds: 60000
-#配置网关信息
+#閰嶇疆缃戝叧淇℃伅
 zuul:
-  #配置超时时间为30秒
+  #閰嶇疆瓒呮椂鏃堕棿涓�30绉�
   host:
     socket-timeout-millis: 60000
     connect-timeout-millis: 60000
-  #需要过滤的请求
+  #闇�瑕佽繃婊ょ殑璇锋眰
   #ignoredPatterns: /**/swagger-ui.html
   routes:
-    #用户中心
+    #鐢ㄦ埛涓績
     user:
       path: /UserApi/**
-      serviceId: super-boot-user-center
-    #鉴权中心
+      serviceId: invengo-user
+    #閴存潈涓績
     secruity:
       path: /AuthApi/**
-      serviceId: super-boot-secruity-center
+      serviceId: invengo-secruity
