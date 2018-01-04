@@ -1,38 +1,38 @@
-#web容器配置
+#web瀹瑰櫒閰嶇疆
 server:
   context-path: /
   port: 3333
-#启用调试模式
+#鍚敤璋冭瘯妯″紡
 debug: true
-#日志配置
+#鏃ュ織閰嶇疆
 logging:
   config: classpath:log4j2-dev.xml
-#关闭安全认证
+#鍏抽棴瀹夊叏璁よ瘉
 management:
   security:
     enabled: false
-#spring配置
+#spring閰嶇疆
 spring:
   application:
-    name: super-boot-secruity-center
+    name: invengo-secruity
     index: ${random.int}
-  #使用@Aspect注解将一个java类定义为切面类
-  #使用@Pointcut定义一个切入点，可以是一个规则表达式，比如下例中某个package下的所有函数，也可以是一个注解等。
-  #根据需要在切入点不同位置的切入内容
-  #使用@Before在切入点开始处切入内容
-  #使用@After在切入点结尾处切入内容
-  #使用@AfterReturning在切入点return内容之后切入内容（可以用来对处理返回值做一些加工处理）
-  #使用@Around在切入点前后切入内容，并自己控制何时执行切入点自身的内容
-  #使用@AfterThrowing用来处理当切入内容部分抛出异常之后的处理逻辑
-  #使用CGLIB来实现AOP，false是标准Java的实现
+  #浣跨敤@Aspect娉ㄨВ灏嗕竴涓猨ava绫诲畾涔変负鍒囬潰绫�
+  #浣跨敤@Pointcut瀹氫箟涓�涓垏鍏ョ偣锛屽彲浠ユ槸涓�涓鍒欒〃杈惧紡锛屾瘮濡備笅渚嬩腑鏌愪釜package涓嬬殑鎵�鏈夊嚱鏁帮紝涔熷彲浠ユ槸涓�涓敞瑙ｇ瓑銆�
+  #鏍规嵁闇�瑕佸湪鍒囧叆鐐逛笉鍚屼綅缃殑鍒囧叆鍐呭
+  #浣跨敤@Before鍦ㄥ垏鍏ョ偣寮�濮嬪鍒囧叆鍐呭
+  #浣跨敤@After鍦ㄥ垏鍏ョ偣缁撳熬澶勫垏鍏ュ唴瀹�
+  #浣跨敤@AfterReturning鍦ㄥ垏鍏ョ偣return鍐呭涔嬪悗鍒囧叆鍐呭锛堝彲浠ョ敤鏉ュ澶勭悊杩斿洖鍊煎仛涓�浜涘姞宸ュ鐞嗭級
+  #浣跨敤@Around鍦ㄥ垏鍏ョ偣鍓嶅悗鍒囧叆鍐呭锛屽苟鑷繁鎺у埗浣曟椂鎵ц鍒囧叆鐐硅嚜韬殑鍐呭
+  #浣跨敤@AfterThrowing鐢ㄦ潵澶勭悊褰撳垏鍏ュ唴瀹归儴鍒嗘姏鍑哄紓甯镐箣鍚庣殑澶勭悊閫昏緫
+  #浣跨敤CGLIB鏉ュ疄鐜癆OP锛宖alse鏄爣鍑咼ava鐨勫疄鐜�
   aop:
     proxy-target-class: true
   cloud:
-  #启用消息追踪
+  #鍚敤娑堟伅杩借釜
     bus:
       trace:
         enabled: true
-  #配置消息总线
+  #閰嶇疆娑堟伅鎬荤嚎
   rabbitmq:
     host: localhost
     port: 5672
@@ -45,7 +45,7 @@ spring:
     multipart:
       enabled: true
       max-file-size: 1024MB
-  #热加载配置
+  #鐑姞杞介厤缃�
   devtools:
     remote:
       secret: thisismysecret
@@ -54,7 +54,7 @@ spring:
         hibernate:
           show_sql: true
           format_sql: true
-  #数据库连接配置
+  #鏁版嵁搴撹繛鎺ラ厤缃�
   datasource:
     base:
       name: baseDB
@@ -63,30 +63,30 @@ spring:
       url: jdbc:mysql://localhost:3306/super_boot_base?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&remarks=true&useInformationSchema=true
       username: superboot
       password: 123456
-      #初始化大小
+      #鍒濆鍖栧ぇ灏�
       initial-size: 5
       min-idle: 5
       max-active: 20
-      # 配置获取连接等待超时的时间
+      # 閰嶇疆鑾峰彇杩炴帴绛夊緟瓒呮椂鐨勬椂闂�
       max-wait: 60000
-      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      # 閰嶇疆闂撮殧澶氫箙鎵嶈繘琛屼竴娆℃娴嬶紝妫�娴嬮渶瑕佸叧闂殑绌洪棽杩炴帴锛屽崟浣嶆槸姣
       time-between-eviction-runs-millis: 60000
-      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      # 閰嶇疆涓�涓繛鎺ュ湪姹犱腑鏈�灏忕敓瀛樼殑鏃堕棿锛屽崟浣嶆槸姣
       min-evictable-idle-time-millis: 30000
-      #检测连接是否有效的sql
+      #妫�娴嬭繛鎺ユ槸鍚︽湁鏁堢殑sql
       validation-query: SELECT 'x'
       validation-query-timeout: 10000
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
-      # 打开PSCache，并且指定每个连接上PSCache的大小 Mysql下建议关闭
+      # 鎵撳紑PSCache锛屽苟涓旀寚瀹氭瘡涓繛鎺ヤ笂PSCache鐨勫ぇ灏� Mysql涓嬪缓璁叧闂�
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
       #max-open-prepared-statements: 1
       filters: stat,wall,log4j2
-      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      # 閫氳繃connectProperties灞炴�ф潵鎵撳紑mergeSql鍔熻兘锛涙參SQL璁板綍
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      # 合并多个DruidDataSource的监控数据
+      # 鍚堝苟澶氫釜DruidDataSource鐨勭洃鎺ф暟鎹�
       useGlobalDataSourceStat: true
 
     business:
@@ -96,63 +96,63 @@ spring:
       url: jdbc:mysql://localhost:3306/super_boot_secruity?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&remarks=true&useInformationSchema=true
       username: superboot
       password: 123456
-      #初始化大小
+      #鍒濆鍖栧ぇ灏�
       initial-size: 5
       min-idle: 5
       max-active: 20
-      # 配置获取连接等待超时的时间
+      # 閰嶇疆鑾峰彇杩炴帴绛夊緟瓒呮椂鐨勬椂闂�
       max-wait: 60000
-      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      # 閰嶇疆闂撮殧澶氫箙鎵嶈繘琛屼竴娆℃娴嬶紝妫�娴嬮渶瑕佸叧闂殑绌洪棽杩炴帴锛屽崟浣嶆槸姣
       time-between-eviction-runs-millis: 60000
-      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      # 閰嶇疆涓�涓繛鎺ュ湪姹犱腑鏈�灏忕敓瀛樼殑鏃堕棿锛屽崟浣嶆槸姣
       min-evictable-idle-time-millis: 30000
-      #检测连接是否有效的sql
+      #妫�娴嬭繛鎺ユ槸鍚︽湁鏁堢殑sql
       validation-query: SELECT 'x'
       validation-query-timeout: 10000
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
-      # 打开PSCache，并且指定每个连接上PSCache的大小 Mysql下建议关闭
+      # 鎵撳紑PSCache锛屽苟涓旀寚瀹氭瘡涓繛鎺ヤ笂PSCache鐨勫ぇ灏� Mysql涓嬪缓璁叧闂�
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
       #max-open-prepared-statements: 1
       filters: stat,wall,log4j2
-      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      # 閫氳繃connectProperties灞炴�ф潵鎵撳紑mergeSql鍔熻兘锛涙參SQL璁板綍
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      # 合并多个DruidDataSource的监控数据
+      # 鍚堝苟澶氫釜DruidDataSource鐨勭洃鎺ф暟鎹�
       useGlobalDataSourceStat: true
     druid:
-      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      # 閰嶇疆鐩戞帶缁熻鎷︽埅鐨刦ilters锛屽幓鎺夊悗鐩戞帶鐣岄潰sql鏃犳硶缁熻锛�'wall'鐢ㄤ簬闃茬伀澧�
       filters: stat,wall,log4j2
-      #配置密码加密存储
+      #閰嶇疆瀵嗙爜鍔犲瘑瀛樺偍
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      #启动ConfigFilter 启用密码加密后必须启用此配置
+      #鍚姩ConfigFilter 鍚敤瀵嗙爜鍔犲瘑鍚庡繀椤诲惎鐢ㄦ閰嶇疆
       filter:
         config:
           enabled: true
-      #Druid监控拦截相关配置相关配置
+      #Druid鐩戞帶鎷︽埅鐩稿叧閰嶇疆鐩稿叧閰嶇疆
       web-stat-filter:
         enabled: true
         url-pattern: /*
         exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
-        #缺省sessionStatMaxCount是1000个
+        #缂虹渷sessionStatMaxCount鏄�1000涓�
         session-stat-max-count: 1000
-        #关闭session统计功能
+        #鍏抽棴session缁熻鍔熻兘
         session-stat-enable: false
-        #druid 0.2.7版本开始支持profile，配置profileEnable能够监控单个url调用的sql列表。
+        #druid 0.2.7鐗堟湰寮�濮嬫敮鎸乸rofile锛岄厤缃畃rofileEnable鑳藉鐩戞帶鍗曚釜url璋冪敤鐨剆ql鍒楄〃銆�
         profile-enable: false
-      #StatViewServlet配置，说明请参考Druid Wiki，配置_StatViewServlet配置
-      #启动项目后访问 http://127.0.0.1:8080/druid
+      #StatViewServlet閰嶇疆锛岃鏄庤鍙傝�僁ruid Wiki锛岄厤缃甠StatViewServlet閰嶇疆
+      #鍚姩椤圭洰鍚庤闂� http://127.0.0.1:8080/druid
       stat-view-servlet:
         enabled: true
         url-pattern: /druid/*
-        #禁用HTML页面上的“Reset All”功能
+        #绂佺敤HTML椤甸潰涓婄殑鈥淩eset All鈥濆姛鑳�
         reset-enable: false
         login-username: superboot
         login-password: superboot
-        #IP白名单(没有配置或者为空，则允许所有访问)
+        #IP鐧藉悕鍗�(娌℃湁閰嶇疆鎴栬�呬负绌猴紝鍒欏厑璁告墍鏈夎闂�)
         allow: 127.0.0.1,192.168.30.50
-        #IP黑名单 (存在共同时，deny优先于allow)
+        #IP榛戝悕鍗� (瀛樺湪鍏卞悓鏃讹紝deny浼樺厛浜巃llow)
         deny: 192.168.1.102
   redis:
     cluster:
@@ -167,27 +167,27 @@ spring:
   mvc:
     throw-exception-if-no-handler-found: true
 
-#Twitter_Snowflake 序列号生成器配置
+#Twitter_Snowflake 搴忓垪鍙风敓鎴愬櫒閰嶇疆
 Snowflake:
-  #工作中心ID 0-31
+  #宸ヤ綔涓績ID 0-31
   workerId: 0
-  #数据中心ID(0~31)
+  #鏁版嵁涓績ID(0~31)
   datacenterId: 0
 
-#启用服务容错保护
+#鍚敤鏈嶅姟瀹归敊淇濇姢
 feign:
   hystrix:
     enabled: true
-#配置注册中心信息
+#閰嶇疆娉ㄥ唽涓績淇℃伅
 eureka:
   instance:
-    #心跳时间间隔
+    #蹇冭烦鏃堕棿闂撮殧
     lease-renewal-interval-in-seconds: 10
-    #无心跳多久后,该服务失效
+    #鏃犲績璺冲涔呭悗,璇ユ湇鍔″け鏁�
     lease-expiration-duration-in-seconds: 30
-    appname: 鉴权中心
+    appname: 閴存潈涓績
 
-#该配置是让Hystrix的超时时间改为30秒
+#璇ラ厤缃槸璁〩ystrix鐨勮秴鏃舵椂闂存敼涓�30绉�
 hystrix:
   command:
     default:
@@ -195,8 +195,8 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 60000
-#启用饥饿加载
+#鍚敤楗ラタ鍔犺浇
 ribbon:
   eager-load:
     enabled: true
-    clients: super-boot-user-center
+    clients: invengo-user

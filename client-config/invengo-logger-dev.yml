@@ -30,6 +30,18 @@ spring:
 #        min-idle: 5
 #      cache-expire: 1800
 #      timeout: 10000
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/jpatest
+#    username: root
+#    password: 123456
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#      show-sql: true
+#  jackson:
+#    serialization:
+#      indent_output: true
 #关闭安全认证
 management:
   security:
