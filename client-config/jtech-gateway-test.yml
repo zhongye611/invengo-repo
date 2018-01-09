@@ -17,16 +17,16 @@ ribbon:
   ReadTimeout: 10000
   ConnectTimeout: 10000
 
-#zuul:
-#  ignoredServices: '*'
-#  routes:
-#    auth-service:
-#      path: /uaa/**
-#      stripPrefix: false
-#      sensitiveHeaders:
-#    svca-service:
-#      path: /svca/**
-#      sensitiveHeaders:
-#    svcb-service:
-#      path: /svcb/**
-#      sensitiveHeaders:
+zuul:
+  ignoredServices: '*'
+  routes:
+    auth-service:
+      path: /uaa/**
+      stripPrefix: false
+      sensitiveHeaders:
+    svca-service:
+      path: /svca/**
+      sensitiveHeaders:
+    svcb-service:
+      path: /svcb/**
+      sensitiveHeaders:
