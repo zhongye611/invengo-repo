@@ -1,32 +1,114 @@
+spring:
+    application:
+        name: jtech-gateway
+    thymeleaf:
+        mode: LEGACYHTML5
+        cache: false
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT+8
+        default-property-inclusion: NON_NULL
+    redis:
+        database: 1
+        host: 127.0.0.1
+        pool:
+            max-active: 20
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+    zipkin:
+      enabled: true
+    sleuth:
+      sampler:
+        percentage: 1
 server:
-  port: 8060
+    port: 8765 #启动端口
 
 management:
   security:
     enabled: false
+  context-path: /mgmt
+
+eureka:
+  instance:
+    health-check-url-path: ${server.context-path}${management.context-path}/health
+    status-page-url-path: ${server.context-path}${management.context-path}/info
+    metadata-map:
+      management.context-path: ${server.context-path}${management.context-path}
+
+    
+#
+zuul:
+  ignored-services: "*"
+  sensitive-headers:
+  prefix: /api #为zuul设置一个公共的前缀
+  ratelimit: # 网关限流
+    key-prefix: gateway_rate
+    enabled: true
+    repository: REDIS #REDIS, JPA, IN_MEMORY
+    behind-proxy: true
+    default-policy: #optional - will apply unless specific policy exists
+      limit: 200
+      refresh-interval: 60 #default value (in seconds)
+      type: #optional
+        - user
+        - origin
+        - url
+  routes:
+    back:
+      path: /admin/**
+      serviceId: jtech-admin
+
+    auth:
+      path: /auth/**
+      serviceId: jtech-auth
+
+ribbon:
+  eureka:
+    enabled: true
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false
+
 
 hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 ##并发执行的最大线程数，默认10
+      maxQueueSize: 1000 ##BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 ##即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 20000
+            timeoutInMilliseconds: 50000
 
-ribbon:
-  ReadTimeout: 10000
-  ConnectTimeout: 10000
 
-zuul:
-  ignoredServices: '*'
-  routes:
-    auth-service:
-      path: /uaa/**
-      stripPrefix: false
-      sensitiveHeaders:
-    svca-service:
-      path: /svca/**
-      sensitiveHeaders:
-    svcb-service:
-      path: /svcb/**
-      sensitiveHeaders:
+gate:
+  ignore:
+    startWith: /static,/auth/jwt
+
+
+auth:
+  serviceId: jtech-auth
+  user:
+    token-header: Authorization
+  client:
+    token-header: client-token
+    id: jtech-gateway  #不填则默认读取spring.application.name
+    secret: 123456
+
+#请求和响应GZIP压缩支持
+feign:
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
