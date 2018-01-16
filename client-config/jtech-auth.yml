@@ -39,6 +39,11 @@ spring:
     sleuth:
         sampler:
             percentage: 1
+    cloud: 
+      bus: 
+        trace: 
+          enabled: true
+
 mybatis:
     basepackage: org.jtech.auth.mapper
     xmlLocation: classpath:mapper/**/*.xml
@@ -76,6 +81,8 @@ management:
   security:
     enabled: false
   context-path: /mgmt
+
+
 
 eureka:
   instance:
