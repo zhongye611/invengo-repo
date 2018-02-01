@@ -29,20 +29,11 @@ spring:
       testOnReturn: false
       poolPreparedStatements: true
       maxOpenPreparedStatements: 20
-    rabbitmq:
-      host: localhost
-      port: 5672
-      username: guest
-      password: guest
     zipkin:
         enabled: true
     sleuth:
         sampler:
             percentage: 1
-    cloud: 
-      bus: 
-        trace: 
-          enabled: true
 
 mybatis:
     basepackage: org.jtech.auth.mapper
@@ -73,25 +64,6 @@ hystrix:
           thread:
             timeoutInMilliseconds: 5000
 
-server:
-  port: 9777
-
-management:
-  security:
-    enabled: false
-
-
-
-eureka:
-  instance:
-    hostname: localhost
-    health-check-url-path: /health
-    status-page-url-path: /info
-  client:
-    #设置与Eureka Server交互的地址，查询服务和注册服务都需要依赖这个地址。默认是http://localhost:8761/eureka ；多个地址可使用 , 分隔。
-    #zhongye_611@163.com:zy1985611@
-    serviceUrl:
-      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:8761/eureka/
 
 jwt:
   token-header: Authorization
@@ -103,9 +75,4 @@ client:
   secret: 123456
   token-header: client-token
   expire: 7200
-  rsa-secret: x2318^^(*WRYQWR(QW&T
-  
-security:
-  user:
-    name: user
-    password: ${CONFIG_SERVER_PASSWORD:123456}
+  rsa-secret: x2318^^(*WRYQWR(QW&T  
